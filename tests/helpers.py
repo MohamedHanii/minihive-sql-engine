@@ -1,0 +1,92 @@
+"""Shared test fixtures: the pizza example database loaded into Luigi's in-memory file system."""
+import luigi.mock
+
+PIZZA_SCHEMA = {
+    "Person": {"name": "string", "age": "integer", "gender": "string"},
+    "Eats": {"name": "string", "pizza": "string"},
+    "Serves": {"pizzeria": "string", "pizza": "string", "price": "integer"},
+    "Frequents": {"name": "string", "pizzeria": "string"},
+}
+
+
+def prepare_mock_file_system():
+    # Ensure mock file system is empty and all temporary files have been cleared.
+    luigi.mock.MockFileSystem().clear()
+
+    f1 = luigi.mock.MockTarget('Person.json').open('w')
+    f1.write('Person\t{"Person.name": "Amy", "Person.age": 16, "Person.gender": "female"}\n')
+    f1.write('Person\t{"Person.name": "Ben", "Person.age": 21, "Person.gender": "male"}\n')
+    f1.write('Person\t{"Person.name": "Cal", "Person.age": 33, "Person.gender": "male"}\n')
+    f1.write('Person\t{"Person.name": "Dan", "Person.age": 13, "Person.gender": "male"}\n')
+    f1.write('Person\t{"Person.name": "Eli", "Person.age": 45, "Person.gender": "male"}\n')
+    f1.write('Person\t{"Person.name": "Fay", "Person.age": 21, "Person.gender": "female"}\n')
+    f1.write('Person\t{"Person.name": "Gus", "Person.age": 24, "Person.gender": "male"}\n')
+    f1.write('Person\t{"Person.name": "Hil", "Person.age": 30, "Person.gender": "female"}\n')
+    f1.write('Person\t{"Person.name": "Ian", "Person.age": 18, "Person.gender": "male"}\n')
+    f1.close()
+
+    f2 = luigi.mock.MockTarget('Eats.json').open('w')
+    f2.write('Eats\t{"Eats.name" : "Amy", "Eats.pizza": "mushroom"}\n')
+    f2.write('Eats\t{"Eats.name" : "Amy", "Eats.pizza": "pepperoni"}\n')
+    f2.write('Eats\t{"Eats.name" : "Ben", "Eats.pizza": "cheese"}\n')
+    f2.write('Eats\t{"Eats.name" : "Ben", "Eats.pizza": "pepperoni"}\n')
+    f2.write('Eats\t{"Eats.name" : "Cal", "Eats.pizza": "supreme"}\n')
+    f2.write('Eats\t{"Eats.name" : "Dan", "Eats.pizza": "cheese"}\n')
+    f2.write('Eats\t{"Eats.name" : "Dan", "Eats.pizza": "mushroom"}\n')
+    f2.write('Eats\t{"Eats.name" : "Dan", "Eats.pizza": "pepperoni"}\n')
+    f2.write('Eats\t{"Eats.name" : "Dan", "Eats.pizza": "sausage"}\n')
+    f2.write('Eats\t{"Eats.name" : "Dan", "Eats.pizza": "supreme"}\n')
+    f2.write('Eats\t{"Eats.name" : "Eli", "Eats.pizza": "cheese"}\n')
+    f2.write('Eats\t{"Eats.name" : "Eli", "Eats.pizza": "supreme"}\n')
+    f2.write('Eats\t{"Eats.name" : "Fay", "Eats.pizza": "mushroom"}\n')
+    f2.write('Eats\t{"Eats.name" : "Gus", "Eats.pizza": "cheese"}\n')
+    f2.write('Eats\t{"Eats.name" : "Gus", "Eats.pizza": "mushroom"}\n')
+    f2.write('Eats\t{"Eats.name" : "Gus", "Eats.pizza": "supreme"}\n')
+    f2.write('Eats\t{"Eats.name" : "Hil", "Eats.pizza": "cheese"}\n')
+    f2.write('Eats\t{"Eats.name" : "Hil", "Eats.pizza": "supreme"}\n')
+    f2.write('Eats\t{"Eats.name" : "Ian", "Eats.pizza": "pepperoni"}\n')
+    f2.write('Eats\t{"Eats.name" : "Ian", "Eats.pizza": "supreme"}\n')
+    f2.close()
+
+    f3 = luigi.mock.MockTarget('Frequents.json').open('w')
+    f3.write('Frequents\t{"Frequents.name" : "Amy", "Frequents.pizzeria": "Pizza Hut"}\n')
+    f3.write('Frequents\t{"Frequents.name" : "Ben", "Frequents.pizzeria": "Pizza Hut"}\n')
+    f3.write('Frequents\t{"Frequents.name" : "Ben", "Frequents.pizzeria": "Chicago Pizza"}\n')
+    f3.write('Frequents\t{"Frequents.name" : "Cal", "Frequents.pizzeria": "Pizza Hut"}\n')
+    f3.write('Frequents\t{"Frequents.name" : "Cal", "Frequents.pizzeria": "New York Pizza"}\n')
+    f3.write('Frequents\t{"Frequents.name" : "Dan", "Frequents.pizzeria": "Straw Hat"}\n')
+    f3.write('Frequents\t{"Frequents.name" : "Dan", "Frequents.pizzeria": "New York Pizza"}\n')
+    f3.write('Frequents\t{"Frequents.name" : "Eli", "Frequents.pizzeria": "Straw Hat"}\n')
+    f3.write('Frequents\t{"Frequents.name" : "Eli", "Frequents.pizzeria": "Chicago Pizza"}\n')
+    f3.write('Frequents\t{"Frequents.name" : "Fay", "Frequents.pizzeria": "Dominos"}\n')
+    f3.write('Frequents\t{"Frequents.name" : "Fay", "Frequents.pizzeria": "Little Ceasars"}\n')
+    f3.write('Frequents\t{"Frequents.name" : "Gus", "Frequents.pizzeria": "Chicago Pizza"}\n')
+    f3.write('Frequents\t{"Frequents.name" : "Gus", "Frequents.pizzeria": "Pizza Hut"}\n')
+    f3.write('Frequents\t{"Frequents.name" : "Hil", "Frequents.pizzeria": "Dominos"}\n')
+    f3.write('Frequents\t{"Frequents.name" : "Hil", "Frequents.pizzeria": "Straw Hat"}\n')
+    f3.write('Frequents\t{"Frequents.name" : "Hil", "Frequents.pizzeria": "Pizza Hut"}\n')
+    f3.write('Frequents\t{"Frequents.name" : "Ian", "Frequents.pizzeria": "New York Pizza"}\n')
+    f3.write('Frequents\t{"Frequents.name" : "Ian", "Frequents.pizzeria": "Straw Hat"}\n')
+    f3.write('Frequents\t{"Frequents.name" : "Ian", "Frequents.pizzeria": "Dominos"}\n')
+    f3.close()
+
+    f4 = luigi.mock.MockTarget('Serves.json').open('w')
+    f4.write('Serves\t{"Serves.pizzeria" : "Chicago Pizza", "Serves.pizza" : "cheese", "Serves.price" : 7.75}\n')
+    f4.write('Serves\t{"Serves.pizzeria" : "Chicago Pizza", "Serves.pizza" : "supreme", "Serves.price" : 8.5}\n')
+    f4.write('Serves\t{"Serves.pizzeria" : "Dominos", "Serves.pizza" : "cheese", "Serves.price" : 9.75}\n')
+    f4.write('Serves\t{"Serves.pizzeria" : "Dominos", "Serves.pizza" : "mushroom", "Serves.price" : 11}\n')
+    f4.write('Serves\t{"Serves.pizzeria" : "Little Ceasars", "Serves.pizza" : "cheese", "Serves.price" : 7}\n')
+    f4.write('Serves\t{"Serves.pizzeria" : "Little Ceasars", "Serves.pizza" : "mushroom", "Serves.price" : 9.25}\n')
+    f4.write('Serves\t{"Serves.pizzeria" : "Little Ceasars", "Serves.pizza" : "pepperoni", "Serves.price" : 9.75}\n')
+    f4.write('Serves\t{"Serves.pizzeria" : "Little Ceasars", "Serves.pizza" : "sausage", "Serves.price" : 9.5}\n')
+    f4.write('Serves\t{"Serves.pizzeria" : "New York Pizza", "Serves.pizza" : "cheese", "Serves.price" : 7}\n')
+    f4.write('Serves\t{"Serves.pizzeria" : "New York Pizza", "Serves.pizza" : "pepperoni", "Serves.price" : 8}\n')
+    f4.write('Serves\t{"Serves.pizzeria" : "New York Pizza", "Serves.pizza" : "supreme", "Serves.price" : 8.5}\n')
+    f4.write('Serves\t{"Serves.pizzeria" : "Pizza Hut", "Serves.pizza" : "cheese", "Serves.price" : 9}\n')
+    f4.write('Serves\t{"Serves.pizzeria" : "Pizza Hut", "Serves.pizza" : "pepperoni", "Serves.price" : 12}\n')
+    f4.write('Serves\t{"Serves.pizzeria" : "Pizza Hut", "Serves.pizza" : "sausage", "Serves.price" : 12}\n')
+    f4.write('Serves\t{"Serves.pizzeria" : "Pizza Hut", "Serves.pizza" : "supreme", "Serves.price" : 12}\n')
+    f4.write('Serves\t{"Serves.pizzeria" : "Straw Hat", "Serves.pizza" : "cheese", "Serves.price" : 9.25}\n')
+    f4.write('Serves\t{"Serves.pizzeria" : "Straw Hat", "Serves.pizza" : "pepperoni", "Serves.price" : 8}\n')
+    f4.write('Serves\t{"Serves.pizzeria" : "Straw Hat", "Serves.pizza" : "sausage", "Serves.price" : 9.17}\n')
+    f4.close()

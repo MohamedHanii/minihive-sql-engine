@@ -1,0 +1,5 @@
+radb>=3.0
+sqlparse>=0.4
+# luigi 3.7+ dropped luigi.contrib.mrrunner, which luigi.contrib.hadoop still imports.
+luigi>=3.0,<3.7
+pytest>=7.0

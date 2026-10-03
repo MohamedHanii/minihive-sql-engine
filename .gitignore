@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# Extracted TPC-H data (unzip data/data_0_01.zip to recreate)
+data/*.json
+
+# Intermediate MapReduce output written by the LOCAL execution environment
+*.tmp
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
